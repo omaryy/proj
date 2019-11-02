@@ -1,0 +1,33 @@
+package com.mycompany.drawing;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class Draweng {
+    static Shape arr[]=new Shape[600];
+    static int counter=0;
+    public void addShape(Shape shape){
+        arr[counter]=shape;
+        counter++;
+    }
+     public void removeShape(Shape shape){
+         for(int i=0;i<counter;i++){
+             if(arr[i]==shape){
+                 for(int j=i;j<counter;j++){
+                     arr[j]=arr[j+1];
+                 }
+                 break;
+             }
+             counter--;
+         }
+     }
+     public Shape []getShapes()
+     {
+         return arr;
+    
+     }
+    
+    
+    
+}

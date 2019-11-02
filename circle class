@@ -1,0 +1,37 @@
+package com.mycompany.drawing;
+
+import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class Circle extends Shapes {
+    private Map <String,Double> mp=new HashMap<String,Double>();
+    private double radius;
+    private int x1;
+    private int y1;
+    public void setradius(double radius)
+    {
+        this.radius=radius;
+        mp.put("radius", radius);
+        setProperties(mp);  
+    }
+    public double  getradius()
+    {
+        return radius;
+        
+    }
+    public Circle( double radius,int x1,int y1)
+    {
+        this.radius=radius;
+        this.x1=x1;
+        this.y1=y1;   
+    }
+    public void draw(Graphics g)
+    {
+        g.drawOval((int)x1,(int)y1,(int)radius,(int)radius); 
+    }  
+}

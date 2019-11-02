@@ -1,0 +1,36 @@
+package com.mycompany.drawing;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class Tria extends Shapes{
+    int x[];
+    int y[];
+    public Tria(int x[],int y[])
+    {
+       for(int i=0;i<3;i++)
+       {
+           this.x[i]=x[i];
+       }
+        for(int i=0;i<3;i++)
+       {
+           this.y[i]=y[i];
+       }
+          
+    }
+
+ 
+    public void draw(Graphics g)
+    {
+        
+        g.drawPolygon(x, y, 3);
+        setColor(Color.black);
+        
+    }
+    
+    
+}

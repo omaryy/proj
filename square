@@ -1,0 +1,27 @@
+package com.mycompany.drawing;
+
+import java.awt.Graphics;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class square extends Shapes{
+   int x1;
+   int y1;
+   private int width;
+   private int height;
+   public square(int x,int y,int width)
+   {
+       this.x1=x;
+       this.y1=y;
+       this.width=width;
+       this.height=width;
+      
+   }
+   public void draw(Graphics g)
+   {
+       g.drawRect(x1, y1, width, height);
+   }
+    
+}

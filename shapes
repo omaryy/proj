@@ -1,0 +1,63 @@
+package com.mycompany.drawing;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Shape;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class Shapes {
+    private Point center;
+    private Map< String,Double> mp=new HashMap< String,Double>();
+    private Color color;
+    private Color fillColor;
+    public Shape s;
+   
+    public void setPosition(Point position) {
+        center=position;
+    }
+    public Point getPosition(){
+        return center;
+    }
+    public void setProperties(Map<String, Double> properties) {
+        mp=properties;
+    }
+    public Map<String, Double> getProperties(){
+        return mp;
+    }
+    public void setColor(Color color) {
+        this.color=color;
+    }
+    public Color getColor() {
+        return color;
+    }
+    public void setFillColor(Color color) {
+        fillColor=color;
+    }
+    public Color getFillColor() {
+        return fillColor;
+    }
+  
+    public void draw(Graphics2D g) {
+      
+        
+    }
+    public Object clone() throws CloneNotSupportedException{
+        Shapes ob=new Shapes();
+        ob.setPosition(center);
+        ob.setProperties(mp);
+        ob.setColor(color);
+        ob.setFillColor(fillColor);
+        return ob;
+    }
+    public void addProperty(String s,double n) {
+        mp.put(s,n);
+    }
+    
+}

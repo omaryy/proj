@@ -1,0 +1,50 @@
+package com.mycompany.drawing;
+
+import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author ELTAYEB
+ */
+public class Elipse extends Shapes{
+    private int x;
+    private int y;
+    private double radius1;
+    private double radius2;
+   private Map<String ,Double> mp=new HashMap<String,Double>();
+    public Elipse(int x,int y,int radius1,int radius2)
+    {
+        this.x=x;
+        this.y=y;
+        this.radius1=radius1;
+        this.radius2=radius2;   
+    }
+    public void setradius1(double radius1)
+    {
+        this.radius1=radius1;
+        mp.put("radius1", radius1);
+        setProperties(mp);
+    }
+    public double getradius1()
+    {
+      return radius1;   
+    }
+     public void setradius2(double radius2)
+    {
+        this.radius2=radius2;
+        mp.put("radius2", radius2);
+        setProperties(mp);
+    }
+     public double getradius2()
+     {
+         return radius2;
+     }
+    
+    public void draw(Graphics g)
+    {
+        g.drawOval(x, y, (int)radius1, (int)radius2);
+    }
+    
+}

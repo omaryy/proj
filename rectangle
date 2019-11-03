@@ -1,31 +1,60 @@
 package com.mycompany.drawing;
 
-import java.awt.Color;
-import java.awt.Graphics;
+
 
 /**
  *
  * @author ELTAYEB
  */
-public class Rect extends Shapes {
-   int x1;
-   int y1;
-    private int width;
-    private int height;
-    public Rect(int x1,int y1,int width,int height )
-    {
-    this.x1=x1;
-    this.y1=y1;
-    this.width=width;
-    this.height=height;   
-    }
-    public void draw(Graphics g)
-    {
-        g.drawRect(x1, y1, width, height);
-        setColor(Color.red);
-     
-    }
-    
-    
-    
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
+public class Rect extends Shapes{
+	//int x1;
+	   //int y1;
+	   // private int width;
+	    //private int height;
+	    private double length;
+		private double width;
+		private Map< String,Double> mp=new HashMap< String,Double>();
+	   /* public Rect(int x1,int y1,int width,int height )
+	    {
+	    this.x1=x1;
+	    this.y1=y1;
+	    this.width=width;
+	    this.height=height;   
+	    }*/
+		Rect(){
+			mp.put("length", 0.0);
+			mp.put("width",0.0);
+			
+		}
+		public void setLen(double len) {
+			length=len;
+			mp.put("length",len);
+			setProperties(mp);
+		}
+		public double getLen() {
+			return length;
+		}
+		public void setwid(double wid) {
+			width=wid;
+			mp.put("width",wid);
+			setProperties(mp);
+		}
+		public double getwid() {
+			return width;
+		}
+	    public void draw(Graphics g)
+	    {
+	    	super.draw(g);
+			Graphics2D g2=(Graphics2D)g;
+			g2.setColor(Color.RED);
+			g2.drawRect((int)(getPosition().x-(getLen()/2)),(int)(getPosition().y-(getwid()/2)),(int)getLen(),(int)getwid());
+	     
+	    }
 }
+

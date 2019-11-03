@@ -1,16 +1,21 @@
 package com.mycompany.drawing;
 
-import java.awt.Color;
-import java.awt.Graphics;
 
 /**
  *
  * @author ELTAYEB
  */
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
 public class Tria extends Shapes{
-    int x[];
-    int y[];
-    public Tria(int x[],int y[])
+	private int x[];
+    private int y[];
+    private Map< String,Double> mp=new HashMap< String,Double>();
+   /* public Tria(int x[],int y[])
     {
        for(int i=0;i<3;i++)
        {
@@ -21,16 +26,35 @@ public class Tria extends Shapes{
            this.y[i]=y[i];
        }
           
+    }*/
+    Tria(){
+    	mp.put("x1",0.0);
+    	mp.put("x2",0.0);
+    	mp.put("x3",0.0);
+    	mp.put("y1",0.0);
+    	mp.put("y2",0.0);
+    	mp.put("y3",0.0);
     }
 
- 
+    public void setx(int arr[]) {
+    	x=arr;
+    }
+    public void sety(int arr[]) {
+    	y=arr;
+    }
+    public int[] getx() {
+    	return x;
+    }
+    public int[] gety() {
+    	return y;
+    }
     public void draw(Graphics g)
     {
-        
-        g.drawPolygon(x, y, 3);
-        setColor(Color.black);
+    	super.draw(g);
+		Graphics2D g2=(Graphics2D)g;
+		g2.setColor(Color.black);
+        g2.drawPolygon(x, y, 3);
         
     }
-    
-    
 }
+

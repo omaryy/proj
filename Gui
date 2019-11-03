@@ -1,49 +1,22 @@
 package com.mycompany.drawing;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Polygon;
-
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-     
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author ELTAYEB
- */
+import java.lang.Math;
 public class mainform extends javax.swing.JFrame {
-
-    /**
-     * Creates new form mainform
-     */
-    public mainform() {
+	public mainform() {
         initComponents();
     }
 private int xstart;
 private int ystart;
 private int xend;
 private int yend;
-private Line2D linebuffer;
-private Ellipse2D circbuffer;
-private Rectangle2D rectanglebuffer;
-private Rectangle2D squarebuffer;
-private Ellipse2D Elipsebuffer;
-private Polygon Trianglebuffer ;
+
 private Graphics g2;
-private List<Line2D> linecontainer=new ArrayList() ;
-private List<Ellipse2D> circcontainer=new ArrayList();
-private List<Ellipse2D> Elipsecontainer=new ArrayList<>();
-private List<Rectangle2D> containRectangle=new ArrayList();
-private List<Polygon> containertrainglr=new  ArrayList();
-private List<Rectangle2D> containsquare=new ArrayList();
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -206,12 +179,23 @@ private List<Rectangle2D> containsquare=new ArrayList();
            canvas1.update(g2);
            xend=evt.getX();
            yend=evt.getY();
+           Draweng ob=new Draweng();
      
-           linebuffer=new Line2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
-              Drawall();
-          Line om=new Line(xstart, ystart,xend,yend); 
-            om.setColor(Color.yellow);
-            om.setFillColor(Color.yellow);
+           //linebuffer=new Line2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
+              //Drawall();
+           ob.refresh(g2);
+          //Line om=new Line(xstart, ystart,xend,yend); 
+           Line om=new Line();
+           Point p1=new Point();
+           Point p2=new Point();
+           p1.x=xstart;
+           p1.y=ystart;
+           p2.x=xend;
+           p2.y=yend;
+           om.setp1(p1);
+           om.setp2(p2);
+           // om.setColor(Color.yellow);
+            //om.setFillColor(Color.yellow);
             om.draw(g2);
     
        }
@@ -221,10 +205,17 @@ private List<Rectangle2D> containsquare=new ArrayList();
            xend=evt.getX();
            yend=evt.getY();
            double radius =Math.pow(Math.pow((yend-ystart),2)+Math.pow(xend-xstart,2),0.5);
-           circbuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)radius,(float)radius);
-           Drawall();
-           
-           Circle om=new Circle(radius, xstart, ystart);
+           //circbuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)radius,(float)radius);
+           //Drawall();
+           Draweng ob=new Draweng();
+           ob.refresh(g2);
+           //Circle om=new Circle(radius, xstart, ystart);
+           Circle om=new Circle();
+           om.setradius(radius);
+           Point p=new Point();
+           p.x=xstart;
+           p.y=ystart;
+           om.setPosition(p);
            om.draw(g2);  
            
            
@@ -244,15 +235,23 @@ private List<Rectangle2D> containsquare=new ArrayList();
            y3=ystart;
            x4=xstart;
            y4=yend;
-           int x[]={xstart,x3,xend,x4};
+          // int x[]={xstart,x3,xend,x4};
            
-           int y[]={ystart,y3,yend,y4};
+          // int y[]={ystart,y3,yend,y4};
            double height=Math.pow(Math.pow((y4-ystart),2)+Math.pow(x4-xstart,2),0.5);
            double width=Math.pow(Math.pow((y3-ystart),2)+Math.pow(x3-xstart,2),0.5);
-           rectanglebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)width,(float)height);
-         Drawall();
-         Rect om=new Rect(xstart,ystart,(int)width,(int)height);
-         
+           //rectanglebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)width,(float)height);
+         //Drawall();
+         //Rect om=new Rect(xstart,ystart,(int)width,(int)height);
+           Draweng ob=new Draweng();
+           ob.refresh(g2);
+         Rect om=new Rect();
+         om.setLen(height);
+         om.setwid(width);
+         Point p=new Point();
+         p.x=xstart;
+         p.y=ystart;
+         om.setPosition(p);
          om.draw(g2);
           
        }
@@ -265,9 +264,14 @@ private List<Rectangle2D> containsquare=new ArrayList();
            int y3=yend;
            int x[]={xstart,x3,xend};
            int y[]={ystart,y3,yend};
-           Trianglebuffer=new Polygon(x, y, 3);
-           Drawall();
-           Tria om=new Tria(x,y);
+           //Trianglebuffer=new Polygon(x, y, 3);
+           //Drawall();
+           //Tria om=new Tria(x,y);
+           Draweng ob=new Draweng();
+           ob.refresh(g2);
+           Tria om=new Tria();
+           om.setx(x);
+           om.sety(y);
            om.draw(g2);
            
        }
@@ -275,11 +279,20 @@ private List<Rectangle2D> containsquare=new ArrayList();
        if(jRadioButton5.isSelected())
        {
            canvas1.update(g2);
-           xend=evt.getX()-xstart;
-           yend=evt.getY()-ystart;
-           Elipsebuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
-           Drawall();
-           Elipse om=new Elipse(xstart, ystart, xend, yend);
+           xend=evt.getX();
+           yend=evt.getY();
+           //Elipsebuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
+           //Drawall();
+           //Elipse om=new Elipse(xstart, ystart, xend, yend);
+           Draweng ob=new Draweng();
+           ob.refresh(g2);
+           Elipse om=new Elipse();
+           Point p1=new Point();
+           p1.x=xstart;
+           p1.y=ystart;
+           om.setPosition(p1);
+           om.setradius1(Math.abs(ystart-yend)*2);
+           om.setradius2(Math.abs(xstart-xend)*2);
            om.draw(g2);       
        }
 
@@ -296,14 +309,21 @@ private List<Rectangle2D> containsquare=new ArrayList();
            y3=ystart;
            x4=xstart;
            y4=yend;
-           int x[]={xstart,x3,xend,x4};
+         //  int x[]={xstart,x3,xend,x4};
            
-           int y[]={ystart,y3,yend,y4};
+          // int y[]={ystart,y3,yend,y4};
            double height=Math.pow(Math.pow((y4-ystart),2)+Math.pow(x4-xstart,2),0.5);
           
-           squarebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)height,(float)height);
-         Drawall();
-         square om=new square(xstart,ystart,(int)height);
+          // squarebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)height,(float)height);
+         //Drawall();
+         //square om=new square(xstart,ystart,(int)height);
+           Draweng ob=new Draweng();
+           ob.refresh(g2);
+           square om=new square();
+           om.setLen(height);
+           Point p=new Point();
+           p.x=xstart;p.y=ystart;
+           om.setPosition(p);
          om.draw(g2);
           
            
@@ -318,11 +338,20 @@ private List<Rectangle2D> containsquare=new ArrayList();
         canvas1.update(g2);
            xend=evt.getX();
            yend=evt.getY();
-       linebuffer=new Line2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
-       linecontainer.add(linebuffer);
+       //linebuffer=new Line2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
+      // linecontainer.add(linebuffer);
      
-       Drawall();
-        om.addShape((Shape)circbuffer);
+      // Drawall();
+        //om.addShape((Shape)circbuffer);
+           Line l=new Line();
+           Point p1=new Point();
+           Point p2=new Point();
+           p1.x=xstart;p1.y=ystart;p2.x=xend;p2.y=yend;
+           l.setp1(p1);
+           l.setp2(p2);
+           om.addline(l);
+           om.addShape( (Shape) l);
+           om.refresh(g2);
    }
    if(jRadioButton2.isSelected())
    {
@@ -331,11 +360,20 @@ private List<Rectangle2D> containsquare=new ArrayList();
            xend=evt.getX();
            yend=evt.getY();
            double radius =Math.pow(Math.pow((yend-ystart),2)+Math.pow(xend-xstart,2),0.5);
-           circbuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)radius,(float)radius);
-       circcontainer.add(circbuffer);
+           //circbuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)radius,(float)radius);
+       //circcontainer.add(circbuffer);
      
-       Drawall();
-        om.addShape((Shape)circbuffer);
+      // Drawall();
+        //om.addShape((Shape)circbuffer);
+           Circle l=new Circle();
+           Point p1=new Point();
+           p1.x=xstart;
+           p1.y=ystart;
+           l.setPosition(p1);
+           l.setradius(radius);
+           om.addcir(l);
+           om.addShape( (Shape) l);
+           om.refresh(g2);
        
    }
    if(jRadioButton3.isSelected())
@@ -356,11 +394,20 @@ private List<Rectangle2D> containsquare=new ArrayList();
            int y[]={ystart,y3,yend,y4};
            double height=Math.pow(Math.pow((y4-ystart),2)+Math.pow(x4-xstart,2),0.5);
            double width=Math.pow(Math.pow((y3-ystart),2)+Math.pow(x3-xstart,2),0.5);
-            rectanglebuffer =new Rectangle2D.Float((float)xstart,(float) ystart, (float)width,(float)height);
-            containRectangle.add(rectanglebuffer);
+            //rectanglebuffer =new Rectangle2D.Float((float)xstart,(float) ystart, (float)width,(float)height);
+           // containRectangle.add(rectanglebuffer);
             
-            Drawall();
-             om.addShape((Shape) rectanglebuffer);
+           // Drawall();
+             //om.addShape((Shape) rectanglebuffer);
+           Rect l=new Rect();
+           Point p1=new Point();
+           p1.x=xstart;p1.y=ystart;
+           l.setPosition(p1);
+           l.setLen(height);
+           l.setwid(width);
+           om.addrect(l);
+           om.addShape( (Shape) l);
+           om.refresh(g2);
    }
    if(jRadioButton4.isSelected())
    {
@@ -371,24 +418,40 @@ private List<Rectangle2D> containsquare=new ArrayList();
      int y3=yend;
            int x[]={xstart,x3,xend};
            int y[]={ystart,y3,yend};
-            Trianglebuffer=new Polygon(x, y, 3);
-            containertrainglr.add(Trianglebuffer);
+            //Trianglebuffer=new Polygon(x, y, 3);
+           // containertrainglr.add(Trianglebuffer);
              
-            Drawall();
-            om.addShape((Shape) Trianglebuffer);
+            //Drawall();
+            //om.addShape((Shape) Trianglebuffer);
+           Tria l=new Tria();
+           l.setx(x);
+           l.sety(y);
+           om.addtriangle(l);
+           om.addShape( (Shape) l);
+           om.refresh(g2);
    }
    
    
    if(jRadioButton5.isSelected())
    {
        canvas1.update(g2);
-       xend=evt.getX()-xstart;
-       yend=evt.getY()-ystart;
-       Elipsebuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
-       Elipsecontainer.add(Elipsebuffer);
+       xend=evt.getX();
+       yend=evt.getY();
+       //Elipsebuffer=new Ellipse2D.Float((float)xstart,(float)ystart,(float)xend,(float)yend);
+       //Elipsecontainer.add(Elipsebuffer);
      
-       Drawall();
-          om.addShape((Shape) Elipsebuffer);
+       //Drawall();
+         // om.addShape((Shape) Elipsebuffer);
+       Elipse l=new Elipse();
+       Point p1=new Point();
+       p1.x=xstart;p1.y=ystart;
+       l.setPosition(p1);
+       l.setradius1(Math.abs(ystart-yend)*2);
+       l.setradius2(Math.abs(xstart-xend)*2);
+       om.addellipse(l);
+       om.addShape( (Shape) l);
+       om.refresh(g2);
+       
    }
    if(jRadioButton6.isSelected())
    {
@@ -407,25 +470,137 @@ private List<Rectangle2D> containsquare=new ArrayList();
            
            int y[]={ystart,y3,yend,y4};
            double height=Math.pow(Math.pow((y4-ystart),2)+Math.pow(x4-xstart,2),0.5);
-           squarebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)height,(float)height);
-        containsquare.add(squarebuffer);
+          // squarebuffer=new Rectangle2D.Float((float)xstart,(float) ystart,(float)height,(float)height);
+        //containsquare.add(squarebuffer);
         
-           Drawall();    
-        om.addShape((Shape) squarebuffer);
+           //Drawall();    
+        //om.addShape((Shape) squarebuffer);
+           square l=new square();
+           Point p1=new Point();
+           p1.x=xstart;
+           p1.y=ystart;
+           l.setPosition(p1);
+           l.setLen(height);
+           om.addsquare(l);
+           om.addShape( (Shape) l);
+           om.refresh(g2);
    }
     }                                     
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                      
     canvas1.update(g2);
-    linecontainer.clear();
-    containRectangle.clear();
-    circcontainer.clear();
+    Point p=new Point();
+    p.x=evt.getX();
+    p.y=evt.getY();
+    Draweng ob=new Draweng();
+         for(int i=0;i<ob.getrectangle().size();i++)
+         {
+        	 Point p1=new Point();
+        	 p1.x=ob.getrectangle().get(i).getPosition().x;
+        	 p1.y=ob.getrectangle().get(i).getPosition().y;
+           if(p.x>(p1.x-(ob.getrectangle().get(i).getwid()/2))&&p.x<(p1.x+(ob.getrectangle().get(i).getwid()/2))&&p.y>(p1.y-(ob.getrectangle().get(i).getLen()/2))&&p.y<(p1.y+(ob.getrectangle().get(i).getLen()/2)))  
+           {
+               if(jRadioButton8.isSelected())
+               {
+            	   List<Rect> l=new ArrayList<>();
+            	   l.addAll(ob.getrectangle());
+            	   l.remove(i);
+                   //ob.getrectangle().remove(i);
+                   ob.setrect(l);
+                   canvas1.update(g2);
+                    // Drawall();
+                   ob.refresh(g2);
+               }
+           }
+           
+         }
+         for(int i=0;i<ob.getsquare().size();i++)
+         {
+        	 Point p1=new Point();
+        	 p1.x=ob.getsquare().get(i).getPosition().x;
+        	 p1.y=ob.getsquare().get(i).getPosition().y;
+           if(p.x>(p1.x-(ob.getsquare().get(i).getLen()/2))&&p.x<(p1.x+(ob.getsquare().get(i).getLen()/2))&&p.y>(p1.y-(ob.getsquare().get(i).getLen()/2))&&p.y<(p1.y+(ob.getsquare().get(i).getLen()/2)))  
+           {
+               if(jRadioButton8.isSelected())
+               {
+            	   List<square> l=new ArrayList<>();
+            	   l.addAll(ob.getsquare());
+            	   l.remove(i);
+            	   ob.setsquare(l);
+            	   
+                   //ob.getsquare().remove(i);
+                   canvas1.update(g2);
+                  //Drawall();
+                   ob.refresh(g2);
+               }
+           }
+         } 
+          for(int i=0;i<ob.getcircles().size();i++)
+         {
+        	  Point p1=new Point();
+         	 p1.x=ob.getcircles().get(i).getPosition().x;
+         	 p1.y=ob.getcircles().get(i).getPosition().y;
+           if((((p.x-p1.x)*(p.x-p1.x))+((p.y-p1.y)*(p.y-p1.y)))<(ob.getcircles().get(i).getradius()*ob.getcircles().get(i).getradius()))  
+           {
+               if(jRadioButton8.isSelected())
+               {
+            	   List<Circle> l=new ArrayList<>();
+            	   l.addAll(ob.getcircles());
+            	   l.remove(i);
+            	   ob.setcir(l);
+                   //circcontainer.remove(i);
+                   canvas1.update(g2);
+                 // Drawall();
+                   ob.refresh(g2);
+               }
+           }
+         } 
+           for(int i=0;i<ob.getellipse().size();i++)
+         {
+        	   Point p1=new Point();
+           	 p1.x=ob.getellipse().get(i).getPosition().x;
+           	 p1.y=ob.getellipse().get(i).getPosition().y;
+           if(((((p.x-p1.x)*(p.x-p1.x))/(ob.getellipse().get(i).getradius1()*ob.getellipse().get(i).getradius1()))+(((p.y-p1.y)*(p.y-p1.y))/(ob.getellipse().get(i).getradius2()*ob.getellipse().get(i).getradius2())))<0) 
+           {
+               if(jRadioButton8.isSelected())
+               {
+            	   List<Elipse> l=new ArrayList<>();
+            	   l.addAll(ob.getellipse());
+            	   l.remove(i);
+            	   ob.setellipse(l);
+                   //Elipsecontainer.remove(i);
+                   canvas1.update(g2);
+                  //Drawall();
+                   ob.refresh(g2);
+               }
+           }
+         }
+            for(int i=0;i<ob.gettriangle().size();i++)
+         {
+            	 Point p1=new Point();
+               	 p1.x=ob.gettriangle().get(i).getPosition().x;
+               	 p1.y=ob.gettriangle().get(i).getPosition().y;
+           if(ob.isInside(ob.gettriangle().get(i).getx()[0],ob.gettriangle().get(i).gety()[0],ob.gettriangle().get(i).getx()[1],ob.gettriangle().get(i).gety()[1], ob.gettriangle().get(i).getx()[2],ob.gettriangle().get(i).gety()[2],p.x,p.y))  
+           {
+               if(jRadioButton8.isSelected())
+               {
+            	   List<Tria> l=new ArrayList<>();
+            	   l.addAll(ob.gettriangle());
+            	   l.remove(i);
+            	   ob.settriangle(l);
+                   //containertrainglr.remove(i);
+                   canvas1.update(g2);
+                  //Drawall();
+                   ob.refresh(g2);
+               }
+           }
+         } 
     }                                     
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
-private void Drawall()
+/*private void Drawall()
 {
     for(int i=0;i<linecontainer.size();i++)
     {
@@ -453,7 +628,7 @@ private void Drawall()
         g2.drawRect((int)containsquare.get(i).getX(),(int)containsquare.get(i).getY(),(int)containsquare.get(i).getHeight(),(int)containsquare.get(i).getHeight());
     }
     
-} 
+} */
     /**
      * @param args the command line arguments
      */
@@ -500,5 +675,5 @@ private void Drawall()
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
-    // End of variables declaration                   
 }
+

@@ -1,27 +1,49 @@
 package com.mycompany.drawing;
 
-import java.awt.Graphics;
 
 /**
  *
  * @author ELTAYEB
  */
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
 public class square extends Shapes{
-   int x1;
-   int y1;
-   private int width;
-   private int height;
-   public square(int x,int y,int width)
-   {
-       this.x1=x;
-       this.y1=y;
-       this.width=width;
-       this.height=width;
-      
-   }
-   public void draw(Graphics g)
-   {
-       g.drawRect(x1, y1, width, height);
-   }
-    
+	 //int x1;
+	  // int y1;
+	   //private int width;
+	  // private int height;
+	   private double length;
+		private Map< String,Double> mp=new HashMap< String,Double>();
+	   /*public square(int x,int y,int width)
+	   {
+	       this.x1=x;
+	       this.y1=y;
+	       this.width=width;
+	       this.height=width;
+	      
+	   }*/
+		square(){
+			mp.put("length", 0.0);
+			
+		}
+		public void setLen(double len) {
+			length=len;
+			mp.put("length",len);
+			setProperties(mp);
+		}
+		public double getLen() {
+			return length;
+		}
+	   public void draw(Graphics g)
+	   {
+		   super.draw(g);
+			Graphics2D g2=(Graphics2D)g;
+			g2.setColor(Color.RED);
+			g2.drawRect((int)(getPosition().x-(getLen()/2)),(int)(getPosition().y-(getLen()/2)),(int)getLen(),(int)getLen());
+	   }
 }
+

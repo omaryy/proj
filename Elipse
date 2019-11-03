@@ -1,26 +1,20 @@
 package com.mycompany.drawing;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- *
- * @author ELTAYEB
- */
 public class Elipse extends Shapes{
-    private int x;
-    private int y;
+	//private int x;
+    //private int y;
     private double radius1;
     private double radius2;
    private Map<String ,Double> mp=new HashMap<String,Double>();
-    public Elipse(int x,int y,int radius1,int radius2)
-    {
-        this.x=x;
-        this.y=y;
-        this.radius1=radius1;
-        this.radius2=radius2;   
-    }
+   Elipse(){
+		mp.put("radius1", 0.0);
+		mp.put("radius2",0.0);
+	}
     public void setradius1(double radius1)
     {
         this.radius1=radius1;
@@ -44,7 +38,10 @@ public class Elipse extends Shapes{
     
     public void draw(Graphics g)
     {
-        g.drawOval(x, y, (int)radius1, (int)radius2);
+    	super.draw(g);
+		Graphics2D g2=(Graphics2D)g;
+		g2.setColor(Color.RED);
+		g2.drawOval((getPosition().x)-((int)getradius1()/2),(getPosition().y)-((int)getradius2()/2),(int)getradius1(),(int)getradius2());
     }
-    
 }
+

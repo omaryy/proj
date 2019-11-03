@@ -1,18 +1,19 @@
 package com.mycompany.drawing;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.Map;
-
-/**
- *
- * @author ELTAYEB
- */
-public class Circle extends Shapes {
-    private Map <String,Double> mp=new HashMap<String,Double>();
+public class Circle extends Shapes{
+	private Map <String,Double> mp=new HashMap<String,Double>();
     private double radius;
-    private int x1;
-    private int y1;
+    //private int x1;
+    //private int y1;
+    Circle(){
+		mp.put("radius", 0.0);
+		
+	}
     public void setradius(double radius)
     {
         this.radius=radius;
@@ -24,14 +25,18 @@ public class Circle extends Shapes {
         return radius;
         
     }
-    public Circle( double radius,int x1,int y1)
+    /*public Circle( double radius,int x1,int y1)
     {
         this.radius=radius;
         this.x1=x1;
         this.y1=y1;   
-    }
+    }*/
     public void draw(Graphics g)
     {
-        g.drawOval((int)x1,(int)y1,(int)radius,(int)radius); 
-    }  
+    	super.draw(g);
+		Graphics2D g2=(Graphics2D)g;
+		g2.setColor(Color.RED);
+		g2.drawOval((getPosition().x)-((int)getradius()),(getPosition().y)-((int)getradius()),(int)getradius()*2,(int)getradius()*2);
+    } 
 }
+
